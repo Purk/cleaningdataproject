@@ -1,4 +1,4 @@
-
+#The run_analysis function takes no arguments and returns a combined tidy data set.
 
 run_analysis <- function() {
   library(plyr)
