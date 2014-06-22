@@ -3,6 +3,7 @@
 run_analysis <- function() {
   library(plyr)
   library(car)
+  library(reshape2)
   X_train <- read.delim(paste(getwd(), "/UCI_HAR_Dataset/train/X_train.txt", sep=""), header=F, sep="")
   Y_train <- read.delim(paste(getwd(), "/UCI_HAR_Dataset/train/y_train.txt", sep=""), header=F, sep="")
   X_test <- read.delim(paste(getwd(), "/UCI_HAR_Dataset/test/X_test.txt", sep=""), header=F, sep="")
