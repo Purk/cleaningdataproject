@@ -35,4 +35,8 @@ run_analysis <- function() {
  
   #Extract only the measurements on the mean and standard deviation for each measurement.
   data_wanted <- allData[,grep("mean\\(\\)|std\\(\\)|activity|subject_id", names(allData))] 
+  
+  #Create a data set with the average of each variable for each activity and each subject.
+  molten <- melt(data_wanted, id.vars=c("activity", "subject_id"))
+  molten_mean <- dcast(data=molten, subject_id+activity ~ variable, FUN=mean)
 }
