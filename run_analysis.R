@@ -12,8 +12,10 @@ run_analysis <- function() {
   subject_train <- read.table(paste(getwd(), "/UCI_HAR_Dataset/train/subject_train.txt", sep=""), header=F, stringsAsFactors=F)
   subject_test <- read.table(paste(getwd(), "/UCI_HAR_Dataset/test/subject_test.txt", sep=""), header=F, stringsAsFactors=F)
   
-  varNames <- subset(varNames, select=-c(V1))  #remove sequential numbering of features.
+  #remove sequential numbering of features.
+  varNames <- subset(varNames, select=-c(V1))
   
+  #combine on the rows of training and test data and insert appropriate column headers
   subjData <- rbind(subject_train, subject_test)
   colnames(subjData)[1] <- "subject_id"
   
@@ -25,7 +27,12 @@ run_analysis <- function() {
     colnames(XData)[i] <- as.character(varNames[i,])
   }
   
-  allData <- cbind(subjData, YData, XData)  #combines all data into one data.frame 
+  #combine on the columns all the data into one data.frame
+  allData <- cbind(subjData, YData, XData)
+  
+  #change the numeric activities code to something meaningful
   allData$activity <- recode(allData$activity, '1="WALKING"; 2="WALKING_UPSTAIRS"; 3="WALKING_DOWNSTAIRS"; 4="SITTING"; 5="STANDING"; 6="LAYING"')
+ 
+  #Extract only the measurements on the mean and standard deviation for each measurement.
   data_wanted <- allData[,grep("mean\\(\\)|std\\(\\)|activity|subject_id", names(allData))] 
 }
