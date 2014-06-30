@@ -38,5 +38,5 @@ run_analysis <- function() {
   
   #Create a data set with the average of each variable for each activity and each subject.
   molten <- melt(data_wanted, id.vars=c("activity", "subject_id"))
-  molten_mean <- dcast(data=molten, subject_id+activity ~ variable, FUN=mean)
+  tidy_data <- dcast(data=molten, subject_id+activity ~ variable, FUN=mean)
 }
